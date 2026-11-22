@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Spor Takip">
+  <meta name="description" content="Antrenmanlarını kaydet, gelişimini takip et.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/style.css">
+  <title>Spor Takip</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon">ST</div><div><strong>Spor Takip</strong><small>Antrenman günlüğün</small></div></div>
+    <button id="installBtn" class="install hidden" type="button">Ana ekrana ekle</button>
+  </header>
+  <main class="wrap">
+    <section class="intro"><div><p class="eyebrow">GÜÇLENMEK TAKİPLE BAŞLAR</p><h1>Bugünkü antrenmanını<br><span>kaydet.</span></h1></div><div class="pulse">↗</div></section>
+    <nav class="tabs" aria-label="Bölümler"><button class="tab active" data-tab="workout">Antrenman</button><button class="tab" data-tab="history">Geçmiş</button><button class="tab" data-tab="progress">Gelişim</button><button class="tab" data-tab="library">Hareketler</button></nav>
+
+    <section id="workout" class="panel active">
+      <div class="section-head"><div><p class="eyebrow">YENİ KAYIT</p><h2>Antrenman oluştur</h2></div><span class="date-chip" id="todayLabel"></span></div>
+      <label class="field-label" for="workoutName">Antrenman adı</label><input id="workoutName" class="field" placeholder="Örn. Göğüs + Triceps" maxlength="50">
+      <label class="field-label" for="workoutDate">Tarih</label><input id="workoutDate" class="field" type="date">
+      <div class="divider"></div>
+      <div class="section-head compact"><h3>Hareketler</h3><span id="exerciseCount" class="muted">0 hareket</span></div>
+      <div id="exerciseRows" class="exercise-rows"><div class="empty small-empty">Henüz hareket eklemedin.</div></div>
+      <button id="addRow" class="secondary full" type="button">＋ Hareket ekle</button>
+      <button id="saveWorkout" class="primary full" type="button">Antrenmanı kaydet</button>
+      <p id="workoutMessage" class="message" aria-live="polite"></p>
+    </section>
+
+    <section id="history" class="panel">
+      <div class="section-head"><div><p class="eyebrow">KAYITLARIN</p><h2>Antrenman geçmişi</h2></div></div>
+      <div id="historyList" class="stack"></div>
+    </section>
+
+    <section id="progress" class="panel">
+      <div class="section-head"><div><p class="eyebrow">İLERLEMEN</p><h2>Gelişim grafiği</h2></div></div>
+      <label class="field-label" for="progressExercise">Hareket seç</label><select id="progressExercise" class="field"></select>
+      <div id="progressSummary" class="stats"></div>
+      <div class="chart-card"><canvas id="progressChart" height="230" aria-label="Ağırlık gelişim grafiği"></canvas><p id="chartEmpty" class="empty">Grafik için bu harekete ait en az bir kayıt ekle.</p></div>
+      <p class="hint">Grafik, her antrenmandaki kaydedilmiş ağırlığı gösterir.</p>
+    </section>
+
+    <section id="library" class="panel">
+      <div class="section-head"><div><p class="eyebrow">KENDİ LİSTEN</p><h2>Hareket kütüphanesi</h2></div></div>
+      <div class="inline-form"><input id="newExercise" class="field" placeholder="Örn. Bench Press" maxlength="45"><button id="addExercise" class="primary" type="button">Ekle</button></div>
+      <div id="libraryList" class="library-list"></div>
+    </section>
+
+    <section class="data-tools"><div><strong>Verilerin sende kalsın</strong><p>Yedek alabilir veya önceki yedeğini geri yükleyebilirsin.</p></div><div class="tool-buttons"><button id="exportData" class="tiny-btn" type="button">Yedek indir</button><label class="tiny-btn file-label">Yedek yükle<input id="importData" type="file" accept="application/json" hidden></label></div></section>
+    <footer>Veriler bu cihazdaki tarayıcıda saklanır.</footer>
+  </main>
+  <template id="exerciseTemplate"><div class="exercise-row"><div class="row-top"><select class="field exercise-select" aria-label="Hareket seç"></select><button class="remove-row" type="button" aria-label="Hareketi kaldır">×</button></div><div class="metrics"><label><span>Set</span><input class="field sets" type="number" min="1" max="30" value="3" inputmode="numeric"></label><label><span>Tekrar</span><input class="field reps" type="number" min="1" max="100" value="10" inputmode="numeric"></label><label><span>Ağırlık (kg)</span><input class="field weight" type="number" min="0" max="999" step="0.5" value="0" inputmode="decimal"></label></div></div></template>
+  <script src="/app.js" defer></script>
+</body>
+</html>
